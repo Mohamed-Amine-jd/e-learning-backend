@@ -51,7 +51,7 @@ public class UserService {
         Optional<User> userOptional = userRepository.findByEmail(email);
         if (userOptional.isPresent()) {
             User user = userOptional.get();
-            String resetToken = jwtUtil.generateToken(user.getEmail(), user.getRole());
+            String resetToken = jwtUtil.generateToken(user.getEmail(), user.getRole(), user.getId());
 
             String resetLink = "http://localhost:4200/reset-password?token=" + resetToken;
 
@@ -81,16 +81,18 @@ public class UserService {
     }
 
 
-        public String login(String email, String password) {
-            Optional<User> userOptional = userRepository.findByEmail(email);
-            if (userOptional.isPresent()) {
-                User user = userOptional.get();
-                if (passwordEncoder.matches(password, user.getPassword())) {
-                    return jwtUtil.generateToken(email, user.getRole());
-                }
+    public String login(String email, String password) {
+        Optional<User> userOptional = userRepository.findByEmail(email);
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+            if (passwordEncoder.matches(password, user.getPassword())) {
+                // Pass the user ID along with email and role to generate the token
+                return jwtUtil.generateToken(email, user.getRole(), user.getId());
             }
-            return null;
         }
+        return null;
+    }
+
 
 
 

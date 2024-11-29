@@ -79,21 +79,22 @@ public class AuthController {
                 Optional<User> userOptional = userRepository.findByEmail(loginRequest.getEmail());
                 if (userOptional.isPresent()) {
                     User user = userOptional.get();
-                    // Ajout du rôle dans la réponse
-                    LoginResponse loginResponse = new LoginResponse("Login successful!", token);
-                    loginResponse.setRole(user.getRole()); // Ajoutez le rôle ici
+                    // Add userId in the response
+                    LoginResponse loginResponse = new LoginResponse("Login successful!", token, user.getRole(), user.getId());
+                    System.out.println("id:"+user.getId());
                     return ResponseEntity.ok(loginResponse);
                 }
             }
-            // Réponse d'erreur si l'authentification échoue
-            LoginResponse errorResponse = new LoginResponse("Invalid email or password.", null);
+            // Return error response if login fails
+            LoginResponse errorResponse = new LoginResponse("Invalid email or password.", null, null, null);
             return ResponseEntity.status(400).body(errorResponse);
         } catch (Exception e) {
-            // Gérer les erreurs inattendues
-            LoginResponse errorResponse = new LoginResponse("Error during login: " + e.getMessage(), null);
+            // Handle unexpected errors
+            LoginResponse errorResponse = new LoginResponse("Error during login: " + e.getMessage(), null, null, null);
             return ResponseEntity.status(500).body(errorResponse);
         }
     }
+
 
 
 }

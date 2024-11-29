@@ -2,15 +2,18 @@ package com.example.e_learning_application.config;
 public class LoginResponse {
     private String message;
     private String token;
-    private String role;  // Ajoutez un attribut pour le rôle
+    private String role;
+    private String userId; // Include userId
 
-    // Constructeur
-    public LoginResponse(String message, String token) {
+    // Constructor, getters, and setters
+    public LoginResponse(String message, String token, String role, String userId) {
         this.message = message;
         this.token = token;
+        this.role = role;
+        this.userId = userId;
     }
 
-    // Getters et setters
+    // Getters and setters
     public String getMessage() {
         return message;
     }
@@ -33,5 +36,13 @@ public class LoginResponse {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }

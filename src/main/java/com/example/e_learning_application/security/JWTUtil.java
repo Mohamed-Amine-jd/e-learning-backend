@@ -17,11 +17,12 @@ public class JWTUtil {
     private static final Logger logger = LoggerFactory.getLogger(JWTUtil.class);
     private final Key SECRET_KEY = Keys.secretKeyFor(SignatureAlgorithm.HS256); // Generate a secure key for HS256
 
-    // Generate JWT token
-    public String generateToken(String username, String role) {
+    // Generate JWT token with ID
+    public String generateToken(String username, String role, String userId) {
         String token = Jwts.builder()
                 .setSubject(username)
                 .claim("role", role) // Add the role as a claim
+                .claim("id", userId) // Add the user ID as a claim
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + 3600000)) // 1 hour expiration time
                 .signWith(SECRET_KEY)
@@ -29,6 +30,12 @@ public class JWTUtil {
         logger.info("Generated Token: {}", token);
         return token;
     }
+
+    // Extract user ID from the token
+    public String extractUserId(String token) {
+        return extractClaims(token).get("id", String.class);
+    }
+
 
     // Extract role from the token
     public String extractRole(String token) {

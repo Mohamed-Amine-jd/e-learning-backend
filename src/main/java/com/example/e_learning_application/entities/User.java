@@ -16,6 +16,7 @@ public class User {
     private String universityName;
     private String fieldOfStudy;
     private String speciality;
+    private String image;
     private String role;
 
 
@@ -89,7 +90,13 @@ public class User {
         this.fieldOfStudy = fieldOfStudy;
     }
 
+    public String getImage() {
+        return image;
+    }
 
+    public void setImage(String image) {
+        this.image = image;
+    }
 
     public String getRole() {
         return role;

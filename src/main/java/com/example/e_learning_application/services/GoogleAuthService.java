@@ -106,11 +106,11 @@ public class GoogleAuthService extends DefaultOAuth2UserService {
 
         if (userOptional.isPresent()) {
             User user = userOptional.get();
-            return jwtUtil.generateToken(email, user.getRole()); // Include role in token
+            return jwtUtil.generateToken(email, user.getRole(), user.getId()); // Pass userId now
         }
 
         // If the user is not found, assign a default role
-        return jwtUtil.generateToken(email, "USER");
+        return jwtUtil.generateToken(email, "USER", "defaultId"); // You can provide a default ID if needed
     }
 
 }

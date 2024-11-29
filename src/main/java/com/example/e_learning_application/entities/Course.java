@@ -14,6 +14,7 @@ public class Course {
     private String image;
     private String field;  // The field of study (e.g., Computer Science, Mathematics)
     private String trainerId;  // The ID of the trainer
+    private String accepted;
     private List<String> chapters;  // List of chapter IDs
 
     // Getters and setters
@@ -71,6 +72,14 @@ public class Course {
 
     public void setChapters(List<String> chapters) {
         this.chapters = chapters;
+    }
+
+    public String getAccepted() {
+        return accepted;
+    }
+
+    public void setAccepted(String accepted) {
+        this.accepted = accepted;
     }
 }
 
