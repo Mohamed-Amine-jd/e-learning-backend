@@ -49,4 +49,15 @@ public class CourseController {
         courseService.deleteCourse(courseId);
         return ResponseEntity.ok().build();
     }
+
+
+    @PutMapping("/{courseId}/accept")
+    public ResponseEntity<Course> acceptCourse(@PathVariable String courseId) {
+        try {
+            Course acceptedCourse = courseService.acceptCourse(courseId);
+            return new ResponseEntity<>(acceptedCourse, HttpStatus.OK);
+        } catch (RuntimeException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 }

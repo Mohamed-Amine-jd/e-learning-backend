@@ -3,7 +3,7 @@ package com.example.e_learning_application.entities;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document/*(collection = "users")*/
+@Document(collection = "users")
 public class User {
 
     @Id
@@ -17,7 +17,7 @@ public class User {
     private String fieldOfStudy;
     private String speciality;
     private String role;
-
+    private String image; // Profile picture of the user
 
     // Define possible roles
     public static final String ROLE_USER = "USER";
@@ -89,7 +89,13 @@ public class User {
         this.fieldOfStudy = fieldOfStudy;
     }
 
+    public String getSpeciality() {
+        return speciality;
+    }
 
+    public void setSpeciality(String speciality) {
+        this.speciality = speciality;
+    }
 
     public String getRole() {
         return role;
@@ -99,11 +105,11 @@ public class User {
         this.role = role;
     }
 
-    public String getSpeciality() {
-        return speciality;
+    public String getImage() {
+        return image;
     }
 
-    public void setSpeciality(String speciality) {
-        this.speciality = speciality;
+    public void setImage(String image) {
+        this.image = image;
     }
 }

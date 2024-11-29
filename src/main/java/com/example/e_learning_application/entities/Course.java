@@ -2,6 +2,7 @@ package com.example.e_learning_application.entities;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.util.List;
 
 @Document(collection = "courses")
@@ -12,9 +13,10 @@ public class Course {
     private String name;
     private String description;
     private String image;
-    private String field;  // The field of study (e.g., Computer Science, Mathematics)
-    private String trainerId;  // The ID of the trainer
-    private List<String> chapters;  // List of chapter IDs
+    private String field; // The field of study (e.g., Computer Science, Mathematics)
+    private String trainerId; // The ID of the trainer
+    private List<String> chapters; // List of chapter IDs
+    private String accepted; // Indicates if the admin has accepted the course (e.g., "Pending", "Accepted", "Rejected")
 
     // Getters and setters
     public String getCourseId() {
@@ -72,5 +74,12 @@ public class Course {
     public void setChapters(List<String> chapters) {
         this.chapters = chapters;
     }
-}
 
+    public String getAccepted() {
+        return accepted;
+    }
+
+    public void setAccepted(String accepted) {
+        this.accepted = accepted;
+    }
+}

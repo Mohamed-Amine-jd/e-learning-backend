@@ -50,4 +50,18 @@ public class CourseService {
             return null;
         }
     }
+
+    public Course acceptCourse(String courseId) {
+        Optional<Course> courseOpt = courseRepository.findByCourseId(courseId);
+
+        if (courseOpt.isPresent()) {
+            Course course = courseOpt.get();
+
+            // Update the status to "Accepted"
+            course.setAccepted("Accepted");
+            return courseRepository.save(course);
+        } else {
+            throw new RuntimeException("Course not found with ID: " + courseId);
+        }
+    }
 }
